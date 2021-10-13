@@ -1,0 +1,15 @@
+@{
+
+    ViewData["Title"] = "Genre";
+}
+
+<div class="text-center">
+    Genre:
+    @if (ViewBag.boek != null)
+    {
+        @ViewBag.boek.Genre
+    }else
+    {
+        <div>Not found</div>
+    }
+</div>

@@ -1,0 +1,21 @@
+@{
+    ViewData["Title"] = "Auteur";
+}
+
+<div class="text-center">
+
+    @if(ViewBag.boeken != " " ) {
+        <p>U heeft gezocht op letter: @ViewBag.letter</p>
+    }else {
+        <p>"Niks gevonden met de letter @ViewBag.letter"</p>
+    }
+    <br>
+
+    @foreach (Boek boek in ViewBag.boeken)
+    {
+        @boek.Auteur
+        <br>
+        lk
+    }
+
+</div>
