@@ -3,19 +3,22 @@
 
 <head>
     <title>Bootstrap week 2</title>
+    <script src="home.js"></script>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/home.css" />
+    <link rel="stylesheet" href="home.css" />
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
         crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
     <div class="container-md p-0">
+
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
             <div class="container-fluid">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -85,25 +88,43 @@
         </div>
 
         <div class="row">
-            <div class="col-6">
+            <div class="col-12 col-lg-6">
+                <form>
+                    <div class="mb-3">
+                        <label for="exampleInputName" class="form-label">Naam</label>
+                        <input type="email" class="form-control" id="InputName" aria-describedby="emailHelp">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputStudents" class="form-label">Aantal studenten</label>
+                        <input type="number" class="form-control" id="InputStudents">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleInputEmail" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="InputEmail">
+                    </div>
+                    <!-- <button type="button" id="liveAlertBtn" onclick="f()" class="btn btn-primary">Submit</button>
+                    <div id="liveAlertPlaceholder"></div> -->
+                </form>
+            </div>
+
+            <br>
+
+            <div class="col-12 col-lg-6">
                 <table class="table">
                     <thead>
                         <tr>
-                            <th scope="col">#</th>
                             <th scope="col">Studie</th>
                             <th scope="col">Beschrijving</th>
                             <th scope="col">Email voor vragen</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody id="tbody">
                         <tr>
-                            <th scope="row">1</th>
                             <td>HBO-ICT</td>
                             <td>241</td>
                             <td>helphboict@hhs.nl</td>
                         </tr>
                         <tr>
-                            <th scope="row">2</th>
                             <td>Finance & Control</td>
                             <td>241</td>
                             <td>helpfinandcon@hhs.nl</td>
@@ -111,118 +132,9 @@
                     </tbody>
                 </table>
             </div>
-            <div class="col-6">
-                <form>
-                    <div class="mb-3">
-                      <label for="exampleInputEmail1" class="form-label">Email address</label>
-                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-                      <div id="emailHelp" class="form-text">We'll never share your email with anyone else.</div>
-                    </div>
-                    <div class="mb-3">
-                      <label for="exampleInputPassword1" class="form-label">Password</label>
-                      <input type="password" class="form-control" id="exampleInputPassword1">
-                    </div>
-                    <div class="mb-3 form-check">
-                      <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                      <label class="form-check-label" for="exampleCheck1">Check me out</label>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                  </form>
-            </div>
         </div>
 
     </div>
-
-    <!-- <p>
-        De Haagse Hogeschool ("HHs", "De Haagse") biedt hbo-opleidingen aan op
-        bachelorniveau (voltijd, deeltijd, duaal) en op master- en
-        post-hbo-niveau. De hogeschool heeft een internationaal karakter. Locaties
-        van De Haagse Hogeschool bevinden zich in de Haagse wijk Laakhaven, vlak
-        bij station Holland Spoor.
-    </p>
-
-    <h1>Geschiedenis</h1>
-
-    <p>
-        De Haagse Hogeschool kwam op 12 januari 1987 tot stand toen 6
-        gemeentelijke en 9 bijzondere instellingen voor hoger beroepsonderwijs in
-        de regio Den Haag samengingen. Op 1 september 1987 verwelkomde De Haagse
-        Hogeschool haar eerste studenten. In de jaren erna breidde de hogeschool
-        steeds verder uit. In 2003 met de Technische Hogeschool Rijswijk. Deze
-        verhuisde naar de campus van de TU Delft en ging verder als De Haagse
-        Hogeschool Delft. In 2009 werd deze vestiging Delft geopend. In 2003
-        startte De Haagse Hogeschool ook met de Academie voor IT & Design in
-        Zoetermeer, in nauwe samenwerking met het bedrijfsleven daar. De Academie
-        is nu de Faculteit IT & Design. Een onderdeel daarvan, de opleiding
-        HBO-ICT, is gevestigd op het Dutch Innovation Park in Zoetermeer.
-    </p>
-
-    <div class="all-image">
-        <img src="img1.jpg" alt="boy in a jacket" />
-        <img src="img1.jpg" class="middel-image" alt="boy in a jacket" />
-        <img src="img1.jpg" alt="boy in a jacket" />
-    </div>
-
-    <h2>Uitbreidingen</h2>
-    <div class="locatie">
-        <div style="margin-left: 0">Zoetermeer</div>
-        <div>Den Haag</div>
-        <div>Delft</div>
-        <div style="margin-right: 0">Sportcampus Zuiderpark</div>
-    </div>
-    <ul>
-        <li>
-            In de jaren erna breidde de hogeschool steeds verder uit. In 2003 met de
-            Technische Hogeschool Rijswijk. Deze verhuisde naar de campus van de TU
-            Delft en ging verder als De Haagse Hogeschool Delft.
-        </li>
-        <li>
-            De Haagse Hogeschool 2003 startte De Haagse Hogeschool ook met de
-            Academie voor IT & Design in Zoetermeer, in nauwe samenwerking met het
-            bedrijfsleven daar. De Academie is nu de Faculteit IT & Design. Een
-            onderdeel daarvan, de opleiding HBO-ICT, is gevestigd op het Dutch
-            Innovation Park in Zoetermeer.
-        </li>
-        <li>
-            In september 2017 namen de opleidingen HALO (leraar lichamelijke
-            opvoeding), Sportkunde en International Sport Management hun intrek in
-            Sportcampus Zuiderpark, gebouwd op de plaats waar tot 2007 het
-            Zuiderparkstadion van ADO Den Haag stond. Het hypermoderne complex dat
-            voor het stadion in de plaats is gekomen, bevat naast veel
-            sportfaciliteiten ook 12 collegezalen.
-        </li>
-    </ul>
-    <h1>Studies</h1>
-
-    <div class="row">
-        <div id="column-studie">
-            <h4>Studie</h4>
-            <p>HBO-ICT</p>
-            <p>Finance & Control</p>
-        </div>
-        <div id="column-beschrijving">
-            <h4>Beschrijving</h4>
-            <p>176</p>
-            <p>241</p>
-        </div>
-        <div id="column-email">
-            <h4>Email voor vragen</h4>
-            <p>helphboict@hhs.nl</p>
-            <p>helpfinandcon@hhs.nl</p>
-        </div>
-    </div> -->
-
-    <!-- <form onsubmit="return false">
-        <label for="fname">Naam</label><br />
-        <input type="text" id="fname" placeholder="Naam" /><br />
-        <label for="numberStudents">Aantal studenten</label><br />
-        <input type="number" id="students" placeholder="aantal studenten" /><br />
-        <label for="email">email</label><br />
-        <input type="email" id="email" placeholder="Voer je email in" /><br />
-        <input type="submit" value="Submit" onclick="f()"></input>
-    </form>
-
-    <button class="button-right-corner" type="aanmelden">Meld mij aan!</button> -->
 </body>
 
 </html>
