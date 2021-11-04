@@ -6,89 +6,98 @@ using System.Collections.Generic;
 
 public class MyDatabase : DbContext
 {
-    protected override void OnConfiguring(DbContextOptionsBuilder b) => b.UseSqlServer("Server=localhost;Database=master;Trusted_Connection=True;");
-    
-    public DbSet<Owner> Owners { get; set; }
-    public DbSet<Tenant> Tenants { get; set; }
-    public DbSet<Car> Cars { get; set; }
+    protected override void OnConfiguring(
+        DbContextOptionsBuilder builder) =>
+        builder.UseSqlServer("Server=localhost;Database=master;Trusted_Connection=True;");
+
+    public DbSet<Huurder> Huurder { get; set; }
+    public DbSet<Verhuurder> Verhuurder { get; set; }
+    public DbSet<Auto> Auto { get; set; }
+    public DbSet<HuurContract> HuurContract { get; set; }
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Owner>()
-        .HasIndex(o => o.Email).IsUnique();
-        modelBuilder.Entity<Tenant>()
-        .HasIndex(t => t.Email).IsUnique();
-        modelBuilder.Entity<LeaseAgreement>()
-        .HasKey(key => new { key.CarId, key.TenantId });
+        modelBuilder.Entity<Huurder>()
+        .HasIndex(h => h.Email)
+        .IsUnique();
+
+        modelBuilder.Entity<Verhuurder>()
+        .HasIndex(v => v.Email)
+        .IsUnique();
+
+        modelBuilder.Entity<HuurContract>()
+        .HasKey(h => new { h.HuurderId, h.AutoId });
     }
 
+    // public static void DummyData()
+    // {
+    //     MyDatabase myData = new MyDatabase();
+    //     myData.Huurder.Add(new Huurder() { Naam = "Kees", TelNummer = "0546846", Email = "mohamed@live.nl", Adres = "Prins Annalaan" });
+    //     myData.Huurder.Add(new Huurder() { Naam = "Mo", TelNummer = "6564864", Email = "mo@live.nl", Adres = "Prins Annalaan" });
+
+    //     myData.Verhuurder.Add(new Verhuurder()
+    //     {
+    //         Naam = "Hans",
+    //         TelNummer = "265486",
+    //         Email = "hans@live.nl",
+    //         Adres = "Prins Annalaan",
+    //     });
+    //     myData.Verhuurder.Add(new Verhuurder()
+    //     {
+    //         Naam = "Johan",
+    //         TelNummer = "265486",
+    //         Email = "Johan@live.nl",
+    //         Adres = "Kijezerstaat"
+    //     });
+
+    //     myData.Auto.Add(new Auto() {Merk = "BMW"});
+    //     myData.Auto.Add(new Auto() {Merk = "Audi"});
+
+    //     myData.SaveChanges();
+    // }
 }
 
-public class Owner
+// id, naam, tel-nummer, email (uniek), adres
+[Table("Huurders")]
+public class Huurder
 {
-    [Key]
-    public int Id { get; set; }
-    [Required]
-    public String Name { get; set; }
-    public int PhoneNumber { get; set; }
-    [Required]
-    public String Email { get; set; }
-    [Required]
-    public String Address { get; set; }
-    [InverseProperty("Owner")]
-    public List<Car> Car { get; set; }
-
+    [Required] public int Id { get; set; }
+    public string Naam { get; set; }
+    public string TelNummer { get; set; }
+    public string Email { get; set; }
+    public string Adres { get; set; }
 }
 
-public class Tenant
+// id, naam, tel-nummer, email, adres (not null)
+public class Verhuurder
 {
-    [Key]
-    public int Id { get; set; }
-    [Required]
-    public String Name { get; set; }
-    public int PhoneNumber { get; set; }
-    [Required]
-    public String Email { get; set; }
-    public String Address { get; set; }
+    [Required] public int Id { get; set; }
+    public string Naam { get; set; }
+    public string TelNummer { get; set; }
+    public string Email { get; set; }
+    [Required] public string Adres { get; set; }
+
+    // [InverseProperty("Verhuurder")]
+    public List<Auto> Auto { get; set; }
 }
 
-public class Car
+// id, merk
+public class Auto
 {
-    [Key]
-    public int Id { get; set; }
-    [Required]
-    public String Brand { get; set; }
+    [Required] public int Id { get; set; }
+    public string Merk { get; set; }
 }
 
-public class LeaseAgreement
+// HuurderId, AutoId, BeginDatum, EindDatum
+public class HuurContract
 {
-    [Required]
-    [ForeignKey("CarId")]
-    public int CarId { get; set; }
-    [Required]
-    [ForeignKey("TentantId")]
-    public int TenantId { get; set; }
-    [Required]
-    public DateTime BeginDate { get; set; }
-    [Required]
-    public DateTime EndDate { get; set; }
-}
+    [ForeignKey("huurder_fk")]
+    [Key] public int HuurderId { get; set; }
 
-public class DummyData
-{
+    [ForeignKey("auto_fk")]
+    [Key] public int AutoId { get; set; }
 
-    public static void AddDummyToDatabase()
-    {
+    [Required] public DateTime BeginDatum { get; set; }
 
-        MyDatabase m = new MyDatabase();
-
-        m.Owners.Add(new Owner() { Name = "Mohamed", Email = "Mohamed@live.com", PhoneNumber = 06186654,  Address = "Prinses Annalaan 520" } );
-        m.Owners.Add(new Owner() { Name = "Kees", Email = "Kees@live.com", Address = "Hofkade 220" } );
-        m.Owners.Add(new Owner() { Name = "Kevin", Email = "Kevin@live.com", PhoneNumber = 0655465, Address = "Wassenaar 280" } );
-
-        m.Tenants.Add(new Tenant() { Name = "Richard", Email = "Richard@live.com", PhoneNumber = 06186654,  Address = "Spakeburgsestraat"});
-        m.Tenants.Add(new Tenant() { Name = "Ali", Email = "Ali@live.com", PhoneNumber = 06186654,  Address = "Spakeburgsestraat"});
-        m.Tenants.Add(new Tenant() { Name = "Han", Email = "Han@live.com", PhoneNumber = 06186654,  Address = "Spakeburgsestraat"});
-
-        m.SaveChanges();
-    }
+    [Required] public DateTime EindDatum { get; set; }
 }

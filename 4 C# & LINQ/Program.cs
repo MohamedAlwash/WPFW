@@ -43,7 +43,7 @@ namespace _4_C____LINQ
 
         public static void Opdrachten()
         {
-            // Opdracht1(); // completed
+            Opdracht1(); // completed
             // Opdracht2(); // completed
             // Opdracht3(); // completed
             // Opdracht4(); // completed
@@ -241,8 +241,8 @@ namespace _4_C____LINQ
     {
         public static void Main(string[] args)
         {
-            // Student.Opdrachten();
-            Bezoek.Opdrachten();
+            Student.Opdrachten();
+            // Bezoek.Opdrachten();
             // LosseOpgaven.Opdrachten();
         }
     }
