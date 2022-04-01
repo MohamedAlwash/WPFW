@@ -5,9 +5,10 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
-using _7_MVC_2.Models;
+using week9Xunit1.Models;
+using week9Xunit1.Data;
 
-namespace _7_MVC_2
+namespace week9Xunit1.Controllers
 {
     public class BoekController : Controller
     {
@@ -23,7 +24,7 @@ namespace _7_MVC_2
         public IActionResult Aantal(string auteur) {
 
             ViewBag.auteur = auteur;
-            ViewBag.aantal = Boek.Boeken.Where(b => b.Auteur.Equals(auteur)).Count(); 
+            ViewBag.aantal = _context.Boeken.Where(b => b.Auteur.Equals(auteur)).Count(); 
 
             return View();
         }
@@ -31,7 +32,7 @@ namespace _7_MVC_2
         [HttpGet]
         [Route("genre/{isbn}")]
         public IActionResult Genre(string isbn) {
-            foreach(Boek boeken in Boek.Boeken) {
+            foreach(Boek boeken in _context.Boeken) {
                 if(boeken.Isbn == isbn) ViewBag.genre = boeken.Genre;
             
             }
@@ -45,11 +46,15 @@ namespace _7_MVC_2
 
             ViewBag.selectedLetter = letter;
 
-            var filteredAuteurs = ViewBag.auteurs = Boek.Boeken.Where(b => letter.Equals(b.Auteur[0])).ToList();
-            
-            foreach(Boek boeken in filteredAuteurs) {
-                ViewBag.selectedAuteurs = boeken.Auteur;
+            foreach(Boek boek in _context.Boeken) {
+                Console.WriteLine(letter.Equals(boek.Auteur[0]));
             }
+            // _context.Boeken.Where(b => Console.WriteLine(b.Titel));
+            // var filteredAuteurs = ViewBag.auteurs = _context.Boeken.Where(b => letter.Equals(b.Auteur[0])).ToList();
+            
+            // foreach(Boek boeken in filteredAuteurs) {
+            //     ViewBag.selectedAuteurs = boeken.Auteur;
+            // }
             return View();
         }
 

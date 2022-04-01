@@ -1,9 +1,9 @@
 ﻿using System.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using _7_MVC_2.Models;
+using week9Xunit1.Models;
 
-namespace _7_MVC_2.Controllers
+namespace week9Xunit1.Controllers
 {
     public class HomeController : Controller
     {

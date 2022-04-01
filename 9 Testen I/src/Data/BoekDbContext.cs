@@ -1,10 +1,14 @@
-using _7_MVC_2.Models;
+using week9Xunit1.Models;
 using Microsoft.EntityFrameworkCore;
-public class BoekDbContext : DbContext
+
+namespace week9Xunit1.Data
 {
-    public BoekDbContext(DbContextOptions<BoekDbContext> options)
-        : base(options)
+    public class BoekDbContext : DbContext
     {
+        public BoekDbContext(DbContextOptions<BoekDbContext> options)
+            : base(options)
+        {
+        }
+        public DbSet<Boek> Boeken { get; set; }
     }
-    public DbSet<Boek> Boeken { get; set; }
 }

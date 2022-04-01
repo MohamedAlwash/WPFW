@@ -1,6 +1,6 @@
 using System;
 
-namespace _7_MVC_2.Models
+namespace week9Xunit1.Models
 {
     public class ErrorViewModel
     {

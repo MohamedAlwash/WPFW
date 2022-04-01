@@ -9,8 +9,9 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.EntityFrameworkCore;
+using week9Xunit1.Data;
 
-namespace _7_MVC_2
+namespace week9Xunit1
 {
     public class Startup
     {

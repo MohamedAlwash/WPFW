@@ -2,7 +2,7 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <RootNamespace>_7_MVC_2</RootNamespace>
+    <RootNamespace>week9Xunit1</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>

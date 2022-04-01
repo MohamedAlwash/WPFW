@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
 
-namespace _7_MVC_2.Migrations
+namespace week9Xunit1.Migrations
 {
     public partial class _1 : Migration
     {

@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Collections;
 
-namespace _7_MVC_2.Models
+namespace week9Xunit1.Models
 {
     public class Boek
     {
@@ -25,8 +25,5 @@ namespace _7_MVC_2.Models
             Titel = titel;
             Genre = genre;
         }
-        public static IEnumerable<Boek> Boeken { get; set; } = new List<Boek>() {
-            new Boek(1, "978-7-6512-7309-0", "Wade Dorota Kató", "De mega-explosie", "actie"),
-        };
     }
 }

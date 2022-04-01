@@ -2,8 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using week9Xunit1.Data;
 
-namespace _7_MVC_2.Migrations
+namespace week9Xunit1.Migrations
 {
     [DbContext(typeof(BoekDbContext))]
     partial class BoekDbContextModelSnapshot : ModelSnapshot
@@ -14,7 +15,7 @@ namespace _7_MVC_2.Migrations
             modelBuilder
                 .HasAnnotation("ProductVersion", "5.0.10");
 
-            modelBuilder.Entity("_7_MVC_2.Models.Boek", b =>
+            modelBuilder.Entity("week9Xunit1.Models.Boek", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
