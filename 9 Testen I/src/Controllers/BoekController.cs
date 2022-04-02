@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Collections;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
@@ -21,40 +22,43 @@ namespace week9Xunit1.Controllers
 
         [HttpGet]
         [Route("aantal/{auteur}")]
-        public IActionResult Aantal(string auteur) {
+        public IActionResult Aantal(string auteur)
+        {
 
             ViewBag.auteur = auteur;
-            ViewBag.aantal = _context.Boeken.Where(b => b.Auteur.Equals(auteur)).Count(); 
+            ViewBag.aantal = _context.Boeken.Where(b => b.Auteur.Equals(auteur)).Count();
 
             return View();
         }
 
         [HttpGet]
         [Route("genre/{isbn}")]
-        public IActionResult Genre(string isbn) {
-            foreach(Boek boeken in _context.Boeken) {
-                if(boeken.Isbn == isbn) ViewBag.genre = boeken.Genre;
-            
-            }
-            ViewBag.genre = ViewBag.genre != null ? ViewBag.genre  : "Deze isbn komt niet voor in de lijst.";
+        public IActionResult Genre(string isbn)
+        {
+            ViewBag.genre = _context.Boeken.FirstOrDefault<Boek>(b => b.Isbn.Equals(isbn));
+
+            ViewBag.genre = ViewBag.genre != null ? ViewBag.genre : "Deze isbn komt niet voor in de lijst.";
             return View();
         }
 
         [HttpGet]
         [Route("zoekauteur/{letter}")]
-        public IActionResult ZoekAuteur(char letter) {
+        public IActionResult ZoekAuteur(char letter)
+        {
 
             ViewBag.selectedLetter = letter;
 
-            foreach(Boek boek in _context.Boeken) {
-                Console.WriteLine(letter.Equals(boek.Auteur[0]));
+            List<Boek> auteurs = new List<Boek>();
+            foreach (Boek boek in _context.Boeken)
+            {
+                if (letter.Equals(boek.Auteur[0]))
+                {
+                    auteurs.Add(boek);
+                }
             }
-            // _context.Boeken.Where(b => Console.WriteLine(b.Titel));
-            // var filteredAuteurs = ViewBag.auteurs = _context.Boeken.Where(b => letter.Equals(b.Auteur[0])).ToList();
-            
-            // foreach(Boek boeken in filteredAuteurs) {
-            //     ViewBag.selectedAuteurs = boeken.Auteur;
-            // }
+
+            ViewBag.auteurs = auteurs;
+
             return View();
         }
 

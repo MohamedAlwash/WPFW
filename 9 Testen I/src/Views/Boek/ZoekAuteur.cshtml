@@ -4,5 +4,13 @@
 
 <div class="text-center">
     <h1 class="display-4">Er is gezocht op letter: @ViewBag.selectedLetter</h1>
-        <h1 class="display-4">@ViewBag.selectedAuteurs</h1>
+        <h3 class="display-4">
+            Volgende namen komen naar voren.
+            @foreach(Boek auteur in ViewBag.auteurs) {
+                <div>
+                    naam: @auteur.Auteur
+                </div>
+            }
+            </h3>
+
 </div>
