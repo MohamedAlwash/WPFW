@@ -32,6 +32,7 @@ hs_err_pid*
 *.suo
 *.user
 *.sln.docstates
+*.vscode
 
 # Build results
 
