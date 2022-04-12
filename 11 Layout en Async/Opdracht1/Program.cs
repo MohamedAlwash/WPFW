@@ -2,12 +2,14 @@ using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using Opdracht1.Data;
 using Opdracht1.Models;
+using Opdracht1.ViewModel;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews().AddFluentValidation(fv => fv.RegisterValidatorsFromAssemblyContaining<StudentValidator>());
 builder.Services.AddDbContext<MyDbContext>(options => options.UseSqlite("Data source = Mydatabase.db"));
+builder.Services.AddTransient<Rank>();
 
 var app = builder.Build();
 

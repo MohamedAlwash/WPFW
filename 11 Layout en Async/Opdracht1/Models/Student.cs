@@ -10,7 +10,7 @@ namespace Opdracht1.Models
         public string? Email { get; set; }
         public int Age { get; set; }
         public int Score { get; set; }
-        public List<Student>? Friends { get; set; }
+        public ICollection<Student>? Friends { get; set; }
 
     }
 
@@ -20,10 +20,9 @@ namespace Opdracht1.Models
         {
             RuleFor(s => s.FirstName).NotEmpty().MaximumLength(30).WithMessage("Please specify a first name (maximum length 30)");
             RuleFor(s => s.LastName).NotEmpty().MaximumLength(30).WithMessage("Please specify a last name (maximum length 30)");
-            RuleFor(s => s.Email).EmailAddress().WithMessage("Please specify a email address");
-            RuleFor(s => s.Age).NotEmpty().WithMessage("Please specify your age");
-            RuleFor(s => s.Score).NotEmpty().WithMessage("Please specify your score");
-            RuleFor(s => s.Friends).NotEmpty().WithMessage("Please specify a friend");
+            RuleFor(s => s.Email).NotEmpty().EmailAddress().WithMessage("Please specify a email address");
+            RuleFor(s => s.Age).NotEmpty().GreaterThan(0).LessThan(100).WithMessage("Please specify your age");
+            RuleFor(s => s.Score).NotEmpty().LessThan(10).WithMessage("Please specify your score (Less than 10)");
         }
     }
 }
