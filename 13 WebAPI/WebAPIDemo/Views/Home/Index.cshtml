@@ -1,0 +1,122 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <div>
+        <h3>Remove student</h3>
+        <form onsubmit="return false">
+            <div class="form-group">
+                <label for="">Student ID</label>
+                <input type="number" class="form-control" id="removeStudent" placeholder="ID of a student">
+            </div>
+            <button type="submit" class="btn btn-danger" onclick="deleteStudent()">Delete student</button>
+        </form>
+    </div>
+
+    <div>
+        <h3>Update student</h3>
+        <form onsubmit="return false">
+            <div class="form-group">
+                <label for="">Student ID</label>
+                <input type="number" class="form-control" id="PutStudentID" placeholder="ID of a student">
+            </div>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="PutStudentName" placeholder="Enter name">
+            </div>
+            <div class="form-group">
+                <label for="">Age</label>
+                <input type="number" class="form-control" id="PutStudentAge" placeholder="age">
+            </div>
+            <button type="submit" class="btn btn-secondary" onclick="putStudent()">Update student</button>
+        </form>
+    </div>
+
+    <div>
+        <h3>Add student</h3>
+        <form onsubmit="return false">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="addStudentName" placeholder="Enter name">
+            </div>
+            <div class="form-group">
+                <label for="">Age</label>
+                <input type="number" class="form-control" id="addStudentAge" placeholder="age">
+            </div>
+            <button type="submit" class="btn btn-success" onclick="addStudent()">Add student</button>
+        </form>
+    </div>
+
+    <table class="table table-striped" id="tableStudents">
+        <thead>
+            <tr>
+                <th scope="col">StudentID</th>
+                <th scope="col">Name</th>
+                <th scope="col">Age</th>
+            </tr>
+        </thead>
+        <tbody id="rowStudents">
+        </tbody>
+    </table>
+</div>
+
+
+<script>
+    async function addStudent() {
+        const name = document.getElementById('addStudentName').value;
+        const age = document.getElementById('addStudentAge').value;
+        const response = await fetch("https://localhost:7254/api/student/", {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ "Name": name, "Age": age })
+        });
+        showStudents();
+    }
+
+    async function deleteStudent() {
+        const id = document.getElementById('removeStudent').value;
+        const response = await fetch('https://localhost:7254/api/student/' + id, {
+            method: 'DELETE',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ "Id": id })
+        });
+        showStudents();
+    }
+
+    async function putStudent() {
+        const id = document.getElementById('PutStudentID').value;
+        const name = document.getElementById('PutStudentName').value;
+        const age = document.getElementById('PutStudentAge').value;
+        const response = await fetch('https://localhost:7254/api/student/' + id, {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ "Id": id, "Name": name, "Age": age })
+        });
+        showStudents();
+    }
+
+    const showStudents = async function () {
+        document.getElementById("rowStudents").innerHTML = "";
+
+        const response = await fetch("https://localhost:7254/api/student/");
+        const students = await response.json();
+
+        const rowStudents = document.getElementById("rowStudents");
+        for (var i = 0; i < students.length; i++) {
+            const tr = document.createElement("tr");
+            const thID = document.createElement("th");
+            thID.innerHTML = students[i].id;
+            const tdName = document.createElement("td");
+            tdName.innerHTML = students[i].name;
+            const tdAge = document.createElement("td");
+            tdAge.innerHTML = students[i].age;
+
+            rowStudents.appendChild(tr);
+            tr.appendChild(thID);
+            tr.appendChild(tdName);
+            tr.appendChild(tdAge);
+        }
+    }
+    showStudents();
+</script>
