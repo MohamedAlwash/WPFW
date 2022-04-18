@@ -1,0 +1,77 @@
+@model IEnumerable<DemoApp.Models.Tenant>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<form action="/Tenant/Index" method="get">
+    <label for="Naam">Zoek op naam:</label>
+    <input type="text" id="Naam" name="zoek">
+    <input type="text" name="sorteer" value='@ViewData["sorteer"]' hidden>
+    <input type="submit" value="Zoek!">
+</form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+                @if ((string)ViewData["sorteer"] == "oplopend")
+                {
+                    <a asp-controller="Tenant" asp-action="Index" asp-route-sorteer="aflopend"
+                    asp-route-zoek='@ViewData["zoek"]'>Aflopend</a>
+                }
+                else
+                {
+                    <a asp-controller="Tenant" asp-action="Index" asp-route-sorteer="oplopend"
+                    asp-route-zoek='@ViewData["zoek"]'>Oplopend</a>
+                }
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                Rent car
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.FirstName)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LastName)
+                </td>
+                <td>
+                    @if (item.Rent != null)
+                    {
+                        @Html.DisplayFor(modelItem => item.Rent.Name)
+                    }
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@if ((bool)ViewData["heeftVolgende"])
+{
+    <a sp-controller="Tenant" asp-action="Index" asp-route-pagina='@((int)ViewData["pagina"]+1)'
+    asp-route-zoek='@ViewData["zoek"]' asp-route-sorteer='@ViewData["sorteer"]'>Volgende</a>
+}
+else if ((bool)ViewData["heeftVorige"])
+{
+    <a sp-controller="Tenant" asp-action="Index" asp-route-pagina='@((int)ViewData["pagina"]-1)'
+    asp-route-zoek='@ViewData["zoek"]' asp-route-sorteer='@ViewData["sorteer"]'>Vorige</a>
+}
