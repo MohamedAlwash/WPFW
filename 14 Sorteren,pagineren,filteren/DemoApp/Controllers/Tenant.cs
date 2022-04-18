@@ -46,7 +46,6 @@ namespace DemoApp.Controllers
 
         public IQueryable<Tenant> Pagineer(IQueryable<Tenant> lijst, int pagina, int aantal)
         {
-            if(pagina < 0) pagina = 0;
             return lijst.Skip(pagina * aantal).Take(aantal);
         }
 
@@ -60,9 +59,9 @@ namespace DemoApp.Controllers
             ViewData["sorteer"] = sorteer;
             ViewData["zoek"] = zoek;
             ViewData["pagina"] = pagina;
-            ViewData["heeftVolgende"] = (pagina + 1) * 10 < _context.Tenants.Count();
+            ViewData["heeftVolgende"] = (pagina + 1) * 5 < _context.Tenants.Count();
             ViewData["heeftVorige"] = pagina > 0;
-            return View(await Pagineer(Zoek(Sorteer(_context.Tenants, sorteer), zoek), pagina, 10).Include(t => t.Rent).ToListAsync());
+            return View(await Pagineer(Zoek(Sorteer(_context.Tenants, sorteer), zoek), pagina, 5).Include(t => t.Rent).ToListAsync());
         }
 
         // GET: Tenant/Details/5

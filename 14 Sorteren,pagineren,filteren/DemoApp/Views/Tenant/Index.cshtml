@@ -70,7 +70,7 @@
     <a sp-controller="Tenant" asp-action="Index" asp-route-pagina='@((int)ViewData["pagina"]+1)'
     asp-route-zoek='@ViewData["zoek"]' asp-route-sorteer='@ViewData["sorteer"]'>Volgende</a>
 }
-else if ((bool)ViewData["heeftVorige"])
+@if((bool)ViewData["heeftVorige"])
 {
     <a sp-controller="Tenant" asp-action="Index" asp-route-pagina='@((int)ViewData["pagina"]-1)'
     asp-route-zoek='@ViewData["zoek"]' asp-route-sorteer='@ViewData["sorteer"]'>Vorige</a>
